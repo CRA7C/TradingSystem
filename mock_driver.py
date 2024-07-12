@@ -1,6 +1,17 @@
-from mock_api import MockApi
 from stock_brocker_driver_interface import StockerBrockerDriverInterface
 
+class MockApi:
+    def login(self, id, password):
+        pass
+
+    def buy(self, stock_code, count, price):
+        pass
+
+    def sell(self, stock_code, count, price):
+        pass
+
+    def current_price(self, stock_code) -> int:
+        pass
 
 class MockDriver(StockerBrockerDriverInterface):
     def __init__(self):

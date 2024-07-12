@@ -1,8 +1,10 @@
 from kiwer_driver import KiwerDriver
 from nemo_driver import NemoDriver
 
+
 class AutoTradingSystem:
     def __init__(self):
+        self.prev_price = {}
         self.NemoDriver = None
         self.KiwerDriver = None
         self.brocker = None
@@ -28,6 +30,12 @@ class AutoTradingSystem:
     def get_price(self, code) -> int:
         return self.brocker.get_price(code)
 
+    def buy_nice_timing(self, code, money):
+        self.prev_price[code] = self.get_price(code)
+        current_price = self.get_price(code)
+        if self.prev_price[code] < current_price:
+            self.buy(code, current_price, money // current_price)
+            
     def sell_nice_timing(self, code, quantity):
         prev_price = self.get_price(code)
         for i in range(5):
@@ -36,3 +44,4 @@ class AutoTradingSystem:
                 self.sell(code, curr_price, quantity)
                 break
             prev_price = curr_price
+            
