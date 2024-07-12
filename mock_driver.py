@@ -1,4 +1,5 @@
-from stock_brocker_driver_interface import StockerBrockerDriverInterface
+from stock_brocker_driver_interface import StockerBrokerDriverInterface
+
 
 class MockApi:
     def login(self, id, password):
@@ -13,7 +14,8 @@ class MockApi:
     def current_price(self, stock_code) -> int:
         pass
 
-class MockDriver(StockerBrockerDriverInterface):
+
+class MockDriver(StockerBrokerDriverInterface):
     def __init__(self):
         self.api = MockApi()
 
