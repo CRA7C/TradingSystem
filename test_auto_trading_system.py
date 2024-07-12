@@ -56,6 +56,22 @@ class TestAutoTradingSystem(unittest.TestCase):
         self.system.get_price.assert_called_with('0001')
         self.system.sell.assert_called_once_with('0001', 100, 10)
 
+    # 종목 코드 규칙
+    def test_validate_stock_code(self):
+        self.system.validate_stock_code('005930')  # Valid code
+        self.system.validate_stock_code('A005930')  # Valid code
+        self.system.validate_stock_code('000660')  # Valid code
+        self.system.validate_stock_code('A000660')  # Valid code
+        with self.assertRaises(ValueError):
+            self.system.validate_stock_code('00001')  # Invalid code
+        with self.assertRaises(ValueError):
+            self.system.validate_stock_code('Z00001')  # Invalid code
+
+    # 자산 기능 추가
+    def test_get_asset_status(self):
+        status = self.system.get_asset_status()
+        self.assertEqual(status['amount'], 1000000)
+
 
 if __name__ == '__main__':
     unittest.main()
