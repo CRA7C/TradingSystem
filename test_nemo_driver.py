@@ -17,15 +17,15 @@ class TestNemoDriver(unittest.TestCase):
 
     def test_buy(self):
         self.driver.buy('0001', 100, 10)
-        self.mock_api.purchasing_stock.assert_called_once_with('0001', 100, 10)
+        self.mock_api.purchasing_stock.assert_called_once_with('0001', 10, 100)
 
     def test_sell(self):
         self.driver.sell('0001', 100, 10)
-        self.mock_api.selling_stock.assert_called_once_with('0001', 100, 10)
+        self.mock_api.selling_stock.assert_called_once_with('0001', 10, 100)
 
     def test_get_price(self):
         self.driver.get_price('0001')
-        self.mock_api.get_market_price.assert_called_once_with('0001', 'current')
+        self.mock_api.get_market_price.assert_called_once_with('0001', 0)
 
 
 if __name__ == '__main__':
