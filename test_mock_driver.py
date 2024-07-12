@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import Mock, patch
-from stock_brocker_driver_interface import StockerBrockerDriverInterface
 from mock_driver import MockDriver
 
 
@@ -8,7 +7,7 @@ class TestMockDriver(unittest.TestCase):
 
     def setUp(self):
         self.driver = MockDriver()
-        self.mock_api = Mock(spec=StockerBrockerDriverInterface)
+        self.mock_api = Mock()
         self.driver.api = self.mock_api
 
     def test_login(self):
