@@ -59,15 +59,17 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     # 종목 코드 규칙
     def test_validate_stock_code(self):
-        # valid test cases:
-        self.system.validate_stock_code('005930')  # Valid code
-        self.system.validate_stock_code('A005930')  # Valid code
-        self.system.validate_stock_code('000660')  # Valid code
-        self.system.validate_stock_code('A000660')  # Valid code
-        with self.assertRaises(ValueError):
-            self.system.validate_stock_code('00001')  # Invalid code
-        with self.assertRaises(ValueError):
-            self.system.validate_stock_code('Z00001')  # Invalid code
+        # positive test cases:
+        for code in ['005930', 'A005930', '000660', 'A000660',
+                     '123456', 'A123456', 'B123456', 'C123456', 'K123456']:
+            with self.subTest(f"{code}"):
+                self.system.validate_stock_code(code)  # Valid code
+
+        # negative test cases
+        for code in ['12345', '1234567', '123456A', 'D123456', '123A456', 'A12345']:
+            with self.subTest(f"{code}"):
+                with self.assertRaises(ValueError):
+                    self.system.validate_stock_code(code)  # Invalid code
 
     # 자산 기능 추가
     def test_get_asset_status(self):

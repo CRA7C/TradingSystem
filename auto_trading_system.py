@@ -12,12 +12,13 @@ class AutoTradingSystem:
             'nemo': NemoDriver,
             'mock': MockDriver,
         }
-        self.validation_pattern = re.compile('[ABCK]?[0-9]{6}')
+        
+        self.validation_pattern = re.compile('^[ABCK]?[0-9]{6}$')
         self.status = {
             "amount": 1000000,
             "portfolio": dict()
         }
-
+        
     def select_stock_broker(self, param):
         if param not in self.stock_broker_dict.keys():
             raise ValueError(f"{param} stock broker does not exist.")
