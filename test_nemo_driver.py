@@ -13,7 +13,7 @@ class TestNemoDriver(unittest.TestCase):
 
     def test_login(self):
         self.driver.login('test_id', 'test_pass')
-        self.mock_api.certification.assert_called_once_with('test_id', 'test_pass')
+        self.mock_api.cerification.assert_called_once_with('test_id', 'test_pass')
 
     def test_buy(self):
         self.driver.buy('0001', 100, 10)
