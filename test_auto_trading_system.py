@@ -71,7 +71,7 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     # 자산 기능 추가
     def test_get_asset_status(self):
-        self.system.select_stock_broker('mock')  # 적당히 kiwer 로 선택
+        self.system.select_stock_broker('mock')
 
         status = self.system.get_asset_status()
         self.assertEqual(status['amount'], 1000000)
