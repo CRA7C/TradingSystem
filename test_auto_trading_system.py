@@ -92,6 +92,19 @@ class TestAutoTradingSystem(unittest.TestCase):
         self.assertEqual(status['amount'], 117000)
         self.assertDictEqual(status['portfolio'], {'005930': 5, '000660': 2})
 
+    def test_buy_too_much(self):
+        self.system.select_stock_broker('mock')
+
+        # 삼성전자 주식 구매
+        with self.assertRaises(ValueError):
+            self.system.buy('005930', 84000, 12)  # 삼성전자 주식
+
+    def test_sell_too_much(self):
+        self.system.select_stock_broker('mock')
+
+        with self.assertRaises(ValueError):
+            self.system.sell('005930', 84000, 1)  # 삼성전자 주식
+
 
 if __name__ == '__main__':
     unittest.main()
