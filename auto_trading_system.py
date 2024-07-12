@@ -10,7 +10,7 @@ class AutoTradingSystem:
             'kiwer': KiwerDriver,
             'nemo': NemoDriver,
         }
-        self.validation_pattern = re.compile('[ABCK]?[0-9]{6}')
+        self.validation_pattern = re.compile('^[ABCK]?[0-9]{6}$')
 
     def select_stock_broker(self, param):
         if param not in self.stock_broker_dict.keys():
