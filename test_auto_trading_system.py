@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import Mock, patch
-from auto_trading_system import AutoTradingSystem
+from kiwer_driver import KiwerDriver  # noqa
+from Nemo_driver import NemoDriver  # noqa
+from auto_trading_system import AutoTradingSystem  # noqa
 
 
 class TestAutoTradingSystem(unittest.TestCase):
@@ -8,12 +10,12 @@ class TestAutoTradingSystem(unittest.TestCase):
     def setUp(self):
         self.system = AutoTradingSystem()
 
-    @patch('auto_trading_system.KiwerDriver')
+    @patch('kiwer_driver.KiwerDriver')
     def test_select_stock_brocker_kiwer(self, MockKiwerDriver):
         self.system.select_stock_brocker('kiwer')
         self.assertIsInstance(self.system.brocker, MockKiwerDriver)
 
-    @patch('auto_trading_system.NemoDriver')
+    @patch('Nemo_driver.NemoDriver')
     def test_select_stock_brocker_nemo(self, MockNemoDriver):
         self.system.select_stock_brocker('nemo')
         self.assertIsInstance(self.system.brocker, MockNemoDriver)
