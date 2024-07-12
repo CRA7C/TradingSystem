@@ -4,7 +4,6 @@ from stock_brocker_driver_interface import StockerBrockerDriverInterface
 
 class KiwerDriver(StockerBrockerDriverInterface):
     def __init__(self):
-        super().__init__()
         self.api = KiwerAPI()
 
     def set_api(self, api):
