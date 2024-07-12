@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class StockerBrockerDriverInterface(ABC):
+class StockerBrokerDriverInterface(ABC):
     @abstractmethod
     def login(self, id, passwd):
         pass
