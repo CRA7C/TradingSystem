@@ -105,6 +105,15 @@ class TestAutoTradingSystem(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.system.sell('005930', 84000, 1)  # 삼성전자 주식
 
+    def test_sell_too_much_2(self):
+        self.system.select_stock_broker('mock')
+        self.system.status = {
+            'portfolio': {'005930': 1}
+        }
+
+        with self.assertRaises(ValueError):
+            self.system.sell('005930', 84000, 2)  # 삼성전자 주식
+
 
 if __name__ == '__main__':
     unittest.main()
