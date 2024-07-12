@@ -1,5 +1,6 @@
 from kiwer_driver import KiwerDriver
 from nemo_driver import NemoDriver
+import re
 
 
 class AutoTradingSystem:
@@ -9,6 +10,7 @@ class AutoTradingSystem:
             'kiwer': KiwerDriver,
             'nemo': NemoDriver,
         }
+        self.validation_pattern = re.compile('[ABCK]?[0-9]{6}')
         self.status = {"amount": 1000000}
 
     def select_stock_broker(self, param):
@@ -43,5 +45,10 @@ class AutoTradingSystem:
                 break
             prev_price = curr_price
 
+    def validate_stock_code(self, code):
+        if self.validation_pattern.search(code) is None:
+            raise ValueError
+            
     def get_asset_status(self) -> dict:
         return self.status
+      
