@@ -1,4 +1,5 @@
 import unittest
+from random import randint
 from unittest.mock import Mock, patch
 from kiwer_driver import KiwerDriver  # noqa
 from nemo_driver import NemoDriver  # noqa
@@ -58,6 +59,7 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     # 종목 코드 규칙
     def test_validate_stock_code(self):
+        # valid test cases:
         self.system.validate_stock_code('005930')  # Valid code
         self.system.validate_stock_code('A005930')  # Valid code
         self.system.validate_stock_code('000660')  # Valid code
@@ -69,6 +71,8 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     # 자산 기능 추가
     def test_get_asset_status(self):
+        self.system.select_stock_broker('kiwer')  # 적당히 kiwer 로 선택
+
         status = self.system.get_asset_status()
         self.assertEqual(status['amount'], 1000000)
         status = self.system.get_asset_status()
