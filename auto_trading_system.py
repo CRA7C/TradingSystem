@@ -11,6 +11,7 @@ class AutoTradingSystem:
             'nemo': NemoDriver,
         }
         self.validation_pattern = re.compile('[ABCK]?[0-9]{6}')
+        self.status = {"amount": 1000000}
 
     def select_stock_broker(self, param):
         if param not in self.stock_broker_dict.keys():
@@ -47,3 +48,7 @@ class AutoTradingSystem:
     def validate_stock_code(self, code):
         if self.validation_pattern.search(code) is None:
             raise ValueError
+            
+    def get_asset_status(self) -> dict:
+        return self.status
+      
