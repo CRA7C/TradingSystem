@@ -29,7 +29,7 @@ class AutoTradingSystem:
 
     def buy(self, code, price, quantity):
         if self.status["amount"] < price * quantity:
-            raise ValueError(f"cash is not enough {self.status["amount"]} < {price} * {quantity}")
+            raise ValueError(f"cash is not enough {self.status['amount']} < {price} * {quantity}")
         self.broker.buy(code, price, quantity)
         check_stock = code in self.status["portfolio"]
         if check_stock:
