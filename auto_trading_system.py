@@ -11,7 +11,10 @@ class AutoTradingSystem:
             'nemo': NemoDriver,
         }
         self.validation_pattern = re.compile('[ABCK]?[0-9]{6}')
-        self.status = {"amount": 1000000}
+        self.status = {
+            "amount": 1000000,
+            "portfolio": dict()
+        }
 
     def select_stock_broker(self, param):
         if param not in self.stock_broker_dict.keys():
@@ -22,7 +25,15 @@ class AutoTradingSystem:
         self.broker.login(id, password)
 
     def buy(self, code, price, quantity):
+        if self.status["amount"] < price * quantity:
+            raise ValueError(f"cash is not enough {self.status["amount"]} < {price} * {quantity}")
         self.broker.buy(code, price, quantity)
+        check_stock = code in self.status["portfolio"]
+        if check_stock:
+            self.status["portfolio"][code] += quantity
+        else:
+            self.status["portfolio"][code] = quantity
+        self.status["amount"] -= price * quantity
 
     def sell(self, code, price, quantity):
         self.broker.sell(code, price, quantity)
@@ -48,7 +59,6 @@ class AutoTradingSystem:
     def validate_stock_code(self, code):
         if self.validation_pattern.search(code) is None:
             raise ValueError
-            
+
     def get_asset_status(self) -> dict:
         return self.status
-      
