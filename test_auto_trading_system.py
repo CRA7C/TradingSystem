@@ -31,6 +31,7 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     def test_sell(self):
         self.system.broker = Mock()
+        self.system.buy('0001', 100, 10)
         self.system.sell('0001', 100, 10)
         self.system.broker.sell.assert_called_once_with('0001', 100, 10)
 
