@@ -35,3 +35,13 @@ class AutoTradingSystem:
         current_price = self.get_price(code)
         if self.prev_price[code] < current_price:
             self.buy(code, current_price, money // current_price)
+            
+    def sell_nice_timing(self, code, quantity):
+        prev_price = self.get_price(code)
+        for i in range(5):
+            curr_price = self.get_price(code)
+            if curr_price < prev_price:
+                self.sell(code, curr_price, quantity)
+                break
+            prev_price = curr_price
+            
