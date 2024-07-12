@@ -1,5 +1,6 @@
 import random
 
+
 class KiwerAPI:
     def login(self, id, password):
         print(id + ' login success')
