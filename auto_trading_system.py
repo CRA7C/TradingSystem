@@ -1,5 +1,5 @@
-from stock_brocker_driver_interface import StockerBrockerDriverInterface
-
+from kiwer_driver import KiwerDriver
+from nemo_driver import NemoDriver
 
 class AutoTradingSystem:
     def __init__(self):
@@ -10,8 +10,11 @@ class AutoTradingSystem:
     def select_stock_brocker(self, param):
         if param not in ['kiwer', 'nemo']:
             raise ValueError(f"{param} stock brocker does not exist.")
-        else:
-            self.brocker = None
+
+        if param == 'kiwer':
+            self.brocker = KiwerDriver()
+        if param == 'nemo':
+            self.brocker = NemoDriver()
 
     def login(self, id, password):
         self.brocker.login(id, password)
