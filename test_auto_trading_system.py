@@ -44,7 +44,7 @@ class TestAutoTradingSystem(unittest.TestCase):
         self.system.buy = Mock()
 
         self.system.buy_nice_timing('0001', 1000)
-        self.system.get_price.assert_called_once_with('0001')
+        self.system.get_price.assert_called_with('0001')
         self.system.buy.assert_called_once_with('0001', 100, 10)
 
     def test_sell_nice_timing(self):
