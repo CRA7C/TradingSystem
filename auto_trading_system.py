@@ -1,5 +1,6 @@
 from kiwer_driver import KiwerDriver
 from nemo_driver import NemoDriver
+from mock_driver import MockDriver
 import re
 
 
@@ -9,6 +10,7 @@ class AutoTradingSystem:
         self.stock_broker_dict = {
             'kiwer': KiwerDriver,
             'nemo': NemoDriver,
+            'mock': MockDriver,
         }
         self.validation_pattern = re.compile('[ABCK]?[0-9]{6}')
         self.status = {
