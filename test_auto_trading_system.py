@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 from kiwer_driver import KiwerDriver  # noqa
-from Nemo_driver import NemoDriver  # noqa
+from nemo_driver import NemoDriver  # noqa
 from auto_trading_system import AutoTradingSystem  # noqa
 
 
@@ -10,16 +10,13 @@ class TestAutoTradingSystem(unittest.TestCase):
     def setUp(self):
         self.system = AutoTradingSystem()
 
-    @patch('kiwer_driver.KiwerDriver')
-    def test_select_stock_brocker_kiwer(self, MockKiwerDriver):
+    def test_select_stock_brocker_kiwer(self):
         self.system.select_stock_brocker('kiwer')
-        self.assertIsInstance(self.system.brocker, MockKiwerDriver)
+        self.assertIsInstance(self.system.brocker, KiwerDriver)
 
-    @patch('Nemo_driver.NemoDriver')
-    def test_select_stock_brocker_nemo(self, MockNemoDriver):
+    def test_select_stock_brocker_nemo(self):
         self.system.select_stock_brocker('nemo')
-        print(type(MockNemoDriver))
-        self.assertIsInstance(self.system.brocker, MockNemoDriver)
+        self.assertIsInstance(self.system.brocker, NemoDriver)
 
     def test_login(self):
         self.system.brocker = Mock()
@@ -40,6 +37,24 @@ class TestAutoTradingSystem(unittest.TestCase):
         self.system.brocker = Mock()
         self.system.get_price('0001')
         self.system.brocker.get_price.assert_called_once_with('0001')
+
+    def test_buy_nice_timing(self):
+        self.system.brocker = Mock()
+        self.system.get_price = Mock(return_value=100)
+        self.system.buy = Mock()
+
+        self.system.buy_nice_timing('0001', 1000)
+        self.system.get_price.assert_called_once_with('0001')
+        self.system.buy.assert_called_once_with('0001', 100, 10)
+
+    def test_sell_nice_timing(self):
+        self.system.brocker = Mock()
+        self.system.get_price = Mock(return_value=100)
+        self.system.sell = Mock()
+
+        self.system.sell_nice_timing('0001', 10)
+        self.system.get_price.assert_called_once_with('0001')
+        self.system.sell.assert_called_once_with('0001', 100, 10)
 
 
 if __name__ == '__main__':
