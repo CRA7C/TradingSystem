@@ -18,6 +18,7 @@ class TestAutoTradingSystem(unittest.TestCase):
     @patch('Nemo_driver.NemoDriver')
     def test_select_stock_brocker_nemo(self, MockNemoDriver):
         self.system.select_stock_brocker('nemo')
+        print(type(MockNemoDriver))
         self.assertIsInstance(self.system.brocker, MockNemoDriver)
 
     def test_login(self):
