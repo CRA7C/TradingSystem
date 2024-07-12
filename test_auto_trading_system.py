@@ -40,7 +40,7 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     def test_buy_nice_timing(self):
         self.system.brocker = Mock()
-        self.system.get_price = Mock(return_value=100)
+        self.system.get_price = Mock(side_effect=[90, 100, 110, 120, 130])
         self.system.buy = Mock()
 
         self.system.buy_nice_timing('0001', 1000)
@@ -49,7 +49,7 @@ class TestAutoTradingSystem(unittest.TestCase):
 
     def test_sell_nice_timing(self):
         self.system.brocker = Mock()
-        self.system.get_price = Mock(return_value=100)
+        self.system.get_price = Mock(side_effect=[110, 100, 90, 80, 70])
         self.system.sell = Mock()
 
         self.system.sell_nice_timing('0001', 10)
