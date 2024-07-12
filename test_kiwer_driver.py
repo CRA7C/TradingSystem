@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
+from kiwer_api import KiwerAPI
 from kiwer_driver import KiwerDriver
 
 
@@ -7,7 +8,7 @@ class TestKiwerDriver(unittest.TestCase):
 
     def setUp(self):
         self.driver = KiwerDriver()
-        self.mock_api = Mock()
+        self.mock_api = Mock(spec=KiwerAPI)
         self.driver.api = self.mock_api
 
     def test_login(self):
