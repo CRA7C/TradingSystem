@@ -9,6 +9,7 @@ class AutoTradingSystem:
             'kiwer': KiwerDriver,
             'nemo': NemoDriver,
         }
+        self.status = {"amount": 1000000}
 
     def select_stock_broker(self, param):
         if param not in self.stock_broker_dict.keys():
@@ -41,3 +42,6 @@ class AutoTradingSystem:
                 self.sell(code, curr_price, quantity)
                 break
             prev_price = curr_price
+
+    def get_asset_status(self) -> dict:
+        return self.status
