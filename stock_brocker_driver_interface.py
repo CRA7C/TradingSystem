@@ -2,10 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class StockerBrockerDriverInterface(ABC):
-
-    def __init__(self):
-        raise TypeError
-
     @abstractmethod
     def login(self, id, passwd):
         pass
