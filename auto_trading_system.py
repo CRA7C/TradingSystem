@@ -42,7 +42,9 @@ class AutoTradingSystem:
 
     def sell(self, code, price, quantity):
         if code not in self.status['portfolio']:
-            raise ValueError
+            raise ValueError(f'해당 종목을 보유하고 있지 않습니다. code: {code}')
+        if quantity > self.status['portfolio'][code]:
+            raise ValueError(f"보유한 수량 안에서 판매 가능합니다. code: {code}, quantity: {quantity}")
         self.broker.sell(code, price, quantity)
 
     def get_price(self, code) -> int:
