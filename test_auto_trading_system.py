@@ -71,6 +71,22 @@ class TestAutoTradingSystem(unittest.TestCase):
     def test_get_asset_status(self):
         status = self.system.get_asset_status()
         self.assertEqual(status['amount'], 1000000)
+        status = self.system.get_asset_status()
+
+        # 삼성전자 주식 구매
+        self.system.buy('005930', 84000, 5)  # 삼성전자 주식
+        status = self.system.get_asset_status()
+        self.assertEqual(status['amount'], 580000)
+
+        # 하이닉스 주식 구매
+        self.system.buy('000660', 231500, 2)  # 하이닉스 주식
+        status = self.system.get_asset_status()
+        self.assertEqual(status['amount'], 117000)
+        self.assertDictEqual(status['portfolio'], {
+            '005930': 5,
+            '000660': 2
+        })
+
 
 
 if __name__ == '__main__':
