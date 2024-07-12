@@ -27,3 +27,7 @@ class AutoTradingSystem:
 
     def get_price(self, code) -> int:
         return self.brocker.get_price(code)
+
+    def buy_nice_timing(self, code, money):
+        current_price = self.get_price(code)
+        self.buy(code, 100, 10)
